@@ -9,6 +9,7 @@ Revision history for WWW-Scraper-ISBN-Yahoo_Driver
         - site changed, and even more temperamental than before. Considering
           dumping the driver, as the data returned is minimal, and better
           presented by other sites.
+        - reworked test failure checks.
 
 0.20    2013-03-17
         - added isbn-check.pl to examples.
