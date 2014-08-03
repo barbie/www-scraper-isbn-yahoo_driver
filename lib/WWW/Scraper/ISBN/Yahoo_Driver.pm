@@ -39,7 +39,7 @@ use WWW::Mechanize;
 # Constants
 
 use constant    YAHOO   => 'http://shopping.yahoo.com';
-use constant    SEARCH  => 'http://search.shopping.yahoo.com/search?p=';
+use constant    SEARCH  => 'http://shopping.yahoo.com/search?p=';
 
 #--------------------------------------------------------------------------
 
@@ -113,8 +113,8 @@ sub search {
     my $content = $mech->content();
     #print STDERR "\n# results=[\n$content\n]\n";
 
-    my ($list) = $content =~ m!<ul class="hproducts">(.*?)</ul>!is;
-    my ($link,$thumb) = $list =~ m!<li[^>]+><div class="img"><a href="([^"]+)"[^>]+><img src="([^"]+)"!is;
+    my ($list) = $content =~ m!<ul class="hproducts[^"]*">(.*?)</ul>!is;
+    my ($link,$thumb) = $list =~ m!<li[^>]+>\s*<div class="shmod">\s*<div class="mod-content">\s*<div class="img"><a href="([^"]+)"[^>]+><img src="([^"]+)"!is;
 
     #print STDERR "\n# link=[$link],  thumb=[$thumb], list=[$list]\n";
 
@@ -132,6 +132,9 @@ sub search {
     my $html = $mech->content();
     #print STDERR "\n# page=[\n$html\n]\n";
 
+	return $self->handler("Could not extract data from Yahoo! result page.")
+		unless($html =~ m!</body>\s*</html>!);
+
     $data->{thumb_link}     = $thumb;
     ($data->{image_link})   = $html =~ m!<meta property="og:image" content="([^"]+)"/>!is;
     ($data->{title})        = $html =~ m!<meta property="og:title" content="([^"]+)"/>!is;
@@ -139,7 +142,7 @@ sub search {
     ($data->{publisher})    = $html =~ m!<td class="label"><em>Publisher</em></td><td>([^<]+)</td>!is;
     ($data->{binding})      = $html =~ m!<td class="label"><em>Book Format</em></td><td>([^<]+)</td>!is;
     ($data->{author})       = $html =~ m!<td class="label"><em>Author</em></td><td>([^<]+)</td>!is;
-    ($data->{isbn13})       = $html =~ m!http://shopping.yahoo.com/(97[89]\d+)!s;
+    ($data->{isbn13})       = $ean;
     ($data->{isbn10})       = $self->convert_to_isbn10($ean);
 
 	return $self->handler("Could not extract data from Yahoo! result page.")
