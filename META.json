@@ -54,6 +54,11 @@
 
     "resources": {
         "license": "http://www.perlfoundation.org/artistic_license_2_0",
-        "bugtracker": { "web": "http://rt.cpan.org/Public/Dist/Display.html?Name=WWW-Scraper-ISBN-Yahoo_Driver" }
+        "bugtracker": { "web": "http://rt.cpan.org/Public/Dist/Display.html?Name=WWW-Scraper-ISBN-Yahoo_Driver" },
+        "repository": {
+            "url": "git://github.com/barbie/www-scraper-isbn-yahoo_driver.git",
+            "web": "http://github.com/barbie/www-scraper-isbn-yahoo_driver",
+            "type": "git"
+        }
     }
 }
