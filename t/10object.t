@@ -12,22 +12,22 @@ my $CHECK_DOMAIN    = 'www.google.com';
 
 my %tests = (
     '0307474275' => [
-        [ 'is',     'isbn',         '9780307474278'         ],
-        [ 'is',     'isbn10',       '0307474275'            ],
-        [ 'is',     'isbn13',       '9780307474278'         ],
-        [ 'is',     'ean13',        '9780307474278'         ],
-        [ 'is',     'title',        'The DaVinci Code'      ],
-        [ 'is',     'author',       undef                   ],
-        [ 'is',     'publisher',    undef                   ],
-        [ 'is',     'pubdate',      undef                   ],
-        [ 'is',     'binding',      undef                   ],
-        [ 'is',     'pages',        undef                   ],
-        [ 'is',     'width',        undef                   ],
-        [ 'is',     'height',       undef                   ],
-        [ 'is',     'weight',       undef                   ],
-        [ 'like',   'image_link',   qr!949701887_640!       ],
-        [ 'like',   'thumb_link',   qr!949701887_640!       ],
-        [ 'like',   'book_link',    qr|the-davinci-code|    ]
+        [ 'is',     'isbn',         '9780307474278'                 ],
+        [ 'is',     'isbn10',       '0307474275'                    ],
+        [ 'is',     'isbn13',       '9780307474278'                 ],
+        [ 'is',     'ean13',        '9780307474278'                 ],
+        [ 'is',     'title',        'The Da Vinci Code'             ],
+        [ 'is',     'author',       undef                           ],
+        [ 'is',     'publisher',    undef                           ],
+        [ 'is',     'pubdate',      undef                           ],
+        [ 'is',     'binding',      undef                           ],
+        [ 'is',     'pages',        undef                           ],
+        [ 'is',     'width',        undef                           ],
+        [ 'is',     'height',       undef                           ],
+        [ 'is',     'weight',       undef                           ],
+        [ 'like',   'image_link',   qr!https://ec.yimg.com!         ],
+        [ 'like',   'thumb_link',   qr!https://ec.yimg.com!         ],
+        [ 'like',   'book_link',    qr|https://us.lrd.yahoo.com|    ]
     ],
 );
 
