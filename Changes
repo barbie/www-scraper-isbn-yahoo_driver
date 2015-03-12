@@ -103,11 +103,11 @@ Changes for WWW-Scraper-ISBN-Yahoo_Driver
         - Added an examples directory. Nothing in it yet, except a request
           for interesting scripts.
         - POD updates
-        - Updated the pattern matching code now that Yahoo have changed their 
+        - Updated the pattern matching code now that Yahoo have changed their
           page layouts
         - Devel::Cover = 91.9%
 
-0.04    2001-01-07  
+0.04    2001-01-07
         - handler() moved to WWW::Scraper::ISBN::Driver
         - test suite updated to peform skips if can't access web pages
 

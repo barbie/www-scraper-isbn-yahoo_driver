@@ -52,7 +52,7 @@ use constant    SEARCH  => 'https://shopping.yahoo.com/search?fr=yshoppingheader
 
 =item C<search()>
 
-Creates a query string, then passes the appropriate form fields to the 
+Creates a query string, then passes the appropriate form fields to the
 Yahoo Books server.
 
 The returned page should be the correct catalog page for that ISBN. If not the
@@ -66,7 +66,7 @@ a valid page is returned, the following fields are returned via the book hash:
   title
   author
   pubdate       (no longer provided by Yahoo on page)
-  publisher     
+  publisher
   book_link
   image_link
   thumb_link    (same as image_link)
@@ -92,7 +92,7 @@ sub search {
 
     # validate and convert into EAN13 format
     my $ean = $self->convert_to_ean13($isbn);
-    return $self->handler("Invalid ISBN specified [$isbn]")   
+    return $self->handler("Invalid ISBN specified [$isbn]")
         if(!$ean || (length $isbn == 13 && $isbn ne $ean)
                  || (length $isbn == 10 && $isbn ne $self->convert_to_isbn10($ean)));
     $isbn = $ean;
@@ -146,9 +146,9 @@ sub search {
     ($data->{binding})      = $html =~ m!<td class="label"><em>Book Format</em></td><td>([^<]+)</td>!is;
     ($data->{author})       = $html =~ m!<td class="label"><em>Author</em></td><td>([^<]+)</td>!is;
 
-    ($data->{publisher},$data->{pubdate})    
+    ($data->{publisher},$data->{pubdate})
                             = $data->{description} =~ m!This book is written by (?:[\s\w]+) Published by ([\s\w]+) In (\d+) and!is  if(!$data->{publisher} && $data->{description});
-    ($data->{binding})      = $data->{description} =~ m!This book is written by (?:[\s\w]+) Published by (?:[\s\w]+) In (?:\d+) and is available in ([\w]+)!is   
+    ($data->{binding})      = $data->{description} =~ m!This book is written by (?:[\s\w]+) Published by (?:[\s\w]+) In (?:\d+) and is available in ([\w]+)!is
                                                                                                                                     if(!$data->{binding} && $data->{description});
     ($data->{author})       = $data->{description} =~ m!This book is written by ([\s\w]+) Published by!is                           if(!$data->{author} && $data->{description});
 
