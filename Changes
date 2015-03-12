@@ -1,6 +1,7 @@
 Changes for WWW-Scraper-ISBN-Yahoo_Driver
 =========================================
 
+0.23    2015-03-12
         - updated patterns for alternative HTML pages on Win32.
         - amended tests to allow for when results are returned.
 
