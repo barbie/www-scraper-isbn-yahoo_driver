@@ -133,13 +133,25 @@ sub search {
 	return $self->handler("Could not extract data from Yahoo! result page.")
 		unless($html =~ m!</body>\s*</html>!);
 
-#    $data->{thumb_link}     = $thumb;
-#    ($data->{image_link})   = $html =~ m!<meta property="og:image" content="([^"]+)"/>!is;
+    ($data->{image_link})   = $html =~ m!<meta property="og:image" content="([^"]+)"/>!is;
+    $data->{image_link}     ||= $thumb;
+
     ($data->{title})        = $html =~ m!<span id="productTitle"[^>]*>([^<]*)</span>!is;
+    ($data->{title})        = $html =~ m!<meta property="og:title" content="([^"]+)"/>!is   unless($data->{title});
+
     ($data->{description})  = $html =~ m!<div class="exp-hide"><span itemprop="description">(.*?)</span></div>!is;
+    ($data->{description})  = $html =~ m!<meta property="og:description" content="([^"]+)"/>!is unless($data->{description});
+
     ($data->{publisher})    = $html =~ m!<td class="label"><em>Publisher</em></td><td>([^<]+)</td>!is;
     ($data->{binding})      = $html =~ m!<td class="label"><em>Book Format</em></td><td>([^<]+)</td>!is;
     ($data->{author})       = $html =~ m!<td class="label"><em>Author</em></td><td>([^<]+)</td>!is;
+
+    ($data->{publisher},$data->{pubdate})    
+                            = $data->{description} =~ m!This book is written by (?:[\s\w]+) Published by ([\s\w]+) In (\d+) and!is  if(!$data->{publisher} && $data->{description});
+    ($data->{binding})      = $data->{description} =~ m!This book is written by (?:[\s\w]+) Published by (?:[\s\w]+) In (?:\d+) and is available in ([\w]+)!is   
+                                                                                                                                    if(!$data->{binding} && $data->{description});
+    ($data->{author})       = $data->{description} =~ m!This book is written by ([\s\w]+) Published by!is                           if(!$data->{author} && $data->{description});
+
     ($data->{isbn13})       = $ean;
     ($data->{isbn10})       = $self->convert_to_isbn10($ean);
 
