@@ -2,6 +2,7 @@ Changes for WWW-Scraper-ISBN-Yahoo_Driver
 =========================================
 
         - updated patterns for alternative HTML pages on Win32.
+        - amended tests to allow for when results are returned.
 
 0.22    2014-12-14
         - fixed license fields in META.json to be lists.

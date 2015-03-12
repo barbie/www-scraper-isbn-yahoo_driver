@@ -31,6 +31,15 @@ my %tests = (
     ],
 );
 
+my %alternate = (
+    '0307474275' => {
+        'author'    => 'Dan Brown',
+        'publisher' => 'Random House',
+        'pubdate'   => '2009',
+        'binding'   => 'Paperback'
+    }
+);
+
 my $tests = 0;
 for my $isbn (keys %tests) { $tests += scalar( @{ $tests{$isbn} } ) + 2 }
 
@@ -69,6 +78,11 @@ SKIP: {
             my $fail = 0;
             my $book = $record->book;
             for my $test (@{ $tests{$isbn} }) {
+
+                if(defined $book->{$test->[1]} && $alternate{$isbn}{$test->[1]}) {
+                    $test->[2] = $alternate{$isbn}{$test->[1]};
+                }
+
                 if($test->[0] eq 'ok')          { $fail += ! ok(       $book->{$test->[1]},             ".. '$test->[1]' found [$isbn]"); } 
                 elsif($test->[0] eq 'is')       { $fail += ! is(       $book->{$test->[1]}, $test->[2], ".. '$test->[1]' found [$isbn]"); } 
                 elsif($test->[0] eq 'isnt')     { $fail += ! isnt(     $book->{$test->[1]}, $test->[2], ".. '$test->[1]' found [$isbn]"); } 
